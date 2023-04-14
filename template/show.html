@@ -1,0 +1,96 @@
+{% extends 'navsign.html' %}
+
+{% block content %}
+{% load static %}
+    <style>
+        #bg{
+            background-repeat:no-repeat;
+            background-size:cover;
+        }
+        th,tr{
+            background-color:white;
+            width:180px;
+            height:40px;
+            text-align: center;
+        }
+        th {
+            font-size: 20px;
+            font-weight: bold;
+            color: #5b9fc9;
+        }
+        td {
+            font-size: 18px;
+            color: #333333;
+        }
+        tbody tr:nth-of-type(odd) {
+            background-color: #f2f2f2;
+        }
+        tbody tr:hover {
+            background-color: #d4d4d4;
+        }
+        .btn {
+            font-size: 16px;
+            padding: 5px 10px;
+            margin-right: 5px;
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 2px 2px 5px #999999;
+        }
+        .btn-warning {
+            background-color: #ffc107;
+            border-color: #ffc107;
+            color: #333333;
+        }
+        .btn-warning:hover {
+            background-color: #ffa000;
+            border-color: #ffa000;
+            color: #ffffff;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+            color: #ffffff;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #c82333;
+            color: #ffffff;
+        }
+    </style>
+<body style="background-color:#5b9fc9";>
+    <center>
+    <h1>SHOW STUDENT DETAILS</h1><br><br>
+    <table >
+      <thead>
+          <th>NAME</th>
+          <th>AGE</th>
+          <th>ADDRESS</th>
+          <th>JOINING_DATE</th>
+          <th>MOBILE NUMBER</th>
+          <th>COURSE</th>
+          <th>COURSE FEE</th>
+      </thead>
+      <tbody>
+          {% for st in student %}
+          <tr>
+              <td>{{st.name}}</td>
+              <td>{{st.age}}</td>
+              <td>{{st.address}}</td>
+              <td>{{st.joining_date}}</td>
+              <td>{{st.phone_no}}</td>
+              <td>{{st.course.coursename}}</td>
+              <td>{{st.course.fees}}</td>
+
+              <td><a href="{% url 'editpage' st.id %}">Edit</a></td>
+              <td><a href="{% url 'delete' st.id %}">Delete</a></td>
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+</center>
+</body>
+{% endblock %}
+</html>

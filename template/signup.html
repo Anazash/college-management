@@ -1,0 +1,161 @@
+{% extends 'homnav.html' %}
+
+{% block content %}
+{% load static %}
+    <style>
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .card {
+            margin-top: 50px;
+            margin-bottom: 50px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: #17a2b8;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .form-control {
+            border: none;
+            border-radius: 0px;
+            box-shadow: none;
+            padding-left: 0px;
+            font-size: 14px;
+        }
+
+        .form-control:focus {
+            box-shadow: none;
+        }
+
+        .form-control::placeholder {
+            color: #b0b0b0;
+            font-size: 14px;
+        }
+
+        .input-group-text {
+            border: none;
+            background-color: transparent;
+            color: #b0b0b0;
+        }
+
+        .btn-primary {
+            background-color: #17a2b8;
+            border: none;
+            border-radius: 0px;
+            font-weight: bold;
+        }
+
+        .btn-primary:hover {
+            background-color: #138496;
+        }
+
+        .custom-file-label {
+            background-color: #fff;
+            border: none;
+        }
+
+        .custom-file-label::after {
+            border: none;
+            background-color: transparent;
+        }
+
+        .dropdown-toggle::after {
+            display: none;
+        }
+
+        .dropdown-item {
+            font-size: 14px;
+        }
+
+        .dropdown-item.active,
+        .dropdown-item:active {
+            background-color: #17a2b8;
+            color: #fff;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            font-weight: normal;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="mb-0">Sign Up Form</h4>
+                    </div>
+                    <div class="card-body">
+                      <form action="{% url 'create' %}" enctype="multipart/form-data" method="post">
+                            {% csrf_token %}
+                            {% for message in messages %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                            <div class="form-group">
+                                <label for="fname">First Name</label>
+                                <input type="text" class="form-control" id="fname" name="fname" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lname">Last Name</label>
+                                <input type="text" class="form-control" id="lname" name="lname" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="age">Age</label>
+                                <input type="number" class="form-control" id="age" name="age" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="adrs">Address</label>
+                                <input type="text" class="form-control" id="adrs" name="adrs" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="mail">Email</label>
+                                <input type="email" class="form-control" id="mail" name="mail" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Contact Number</label>
+                                <input type="text" class="form-control" id="phone" name="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="uname">Username</label>
+                                <input type="text" class="form-control" id="uname" name="uname" required>
+                            </div>
+                            <div class="form-group">
+                              <label for="pass">Password</label>
+                              <input type="password" class="form-control-file" id="pass" name="pass" required>
+                          </div>
+                          <div class="form-group">
+                            <label for="pass1">Confirm Password</label>
+                            <input type="password" class="form-control-file" id="photo" name="pass1" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="photo">Upload Your Photo</label>
+                          <input type="file" class="form-control-file" id="photo" name="pic" required>
+                      </div>
+
+                            <div class="form-outline mb-4">
+                              <select class="option" name="subject">
+                                {% for c in course %}
+                                  <option value="{{c.id}}">{{c.coursename}}</option>
+                                {% endfor %}
+                                </select>
+                              </div>
+                            <button type="submit" class="btn btn-primary" href="{% url 'backin' %}">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+{% endblock %}
